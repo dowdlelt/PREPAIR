@@ -14,6 +14,9 @@ end
 
 mag = load_untouch_nii([prepair.indir mag_file]);
 prepair.pixdim=mag.hdr.dime.pixdim;
+% store away the entire header
+prepair.hdr = mag.hdr;
+
 
 if prepair.waitbarBoolean
     waitbar(1/2,wait) % increment the waitbar
