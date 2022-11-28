@@ -25,8 +25,8 @@ prepair = PREPAIR_mag_or_phase(prepair);
 
 
 %% 5) Magnitude image correction
-
-ima_corr = PREPAIR_correction(prepair);
+% get fixed magnitude, and also t stats for cardiac and respriation.
+[ima_corr, t_c, t_r] = PREPAIR_correction(prepair);
 
 if prepair.waitbarBoolean
     wait = waitbar(0,'Saving files ...'); % initialize waitbar
@@ -41,10 +41,22 @@ if ~isfield(prepair, 'outname')
 end
 
 
+
 % Write out the corrected nii file using the original hdr.
 tempnii.img = ima_corr;
 tempnii.hdr = prepair.hdr;
 save_nii(tempnii, fullfile(prepair.outdir,prepair.outname) )
+
+if prepair.savestats == 1
+    % the user wants the stat files saved out, do it. 
+    tempnii.img = t_c;
+    tempnii.hdr = prepair.hdr;
+    save_nii(tempnii, fullfile(prepair.outdir,['tmap_cardiac_', prepair.outname]) )
+
+    tempnii.img = t_r;
+    tempnii.hdr = prepair.hdr;
+    save_nii(tempnii, fullfile(prepair.outdir,['tmap_respiration_', prepair.outname]) )
+end
 
 prepair.ima_corr = ima_corr;
 
