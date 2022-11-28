@@ -99,7 +99,7 @@ fRR_phase=PREPAIR_main_peak(dtTR,respFT_temp);
 drift_phase=f(f<0.9*fRR_phase & p==max(p(f<0.9*fRR_phase)));
 
 % Correct sidebands only if fCC_phase is sideband-related
-sigTR_phase = PREPAIR_phase_remove_sidebands2(Fs, Fs2,dtTR,sigTR_phase,fRR_phase, drift_mag);
+sigTR_phase = PREPAIR_phase_remove_sidebands(Fs, Fs2,dtTR,sigTR_phase,fRR_phase, drift_mag);
 % Refilter sigTR_phase
 cardFT_temp=PREPAIR_filter_signal('CARD',Fs,sigTR_phase);
 % Find the new 1st harmonics
