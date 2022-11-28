@@ -34,7 +34,17 @@ end
 if prepair.waitbarBoolean
     waitbar(1/1,wait) % increment the waitbar
 end
-centre_and_save_nii(make_nii(ima_corr),fullfile(prepair.outdir,'mag_corr.nii'),prepair.pixdim)
+
+% Allow the user to provide a filename out.
+if ~isfield(prepair, 'outname')
+    prepair.outname = 'mag_corr.nii';
+end
+
+
+% Write out the corrected nii file using the original hdr.
+tempnii.img = ima_corr;
+tempnii.hdr = prepair.hdr;
+save_nii(tempnii, fullfile(prepair.outdir,prepair.outname) )
 
 prepair.ima_corr = ima_corr;
 
