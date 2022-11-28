@@ -4,8 +4,9 @@
 
 addpath(genpath('afni_matlab'))
 % Make sure chronux is downloaded! 
-% Add path to chronux toolbox 
-addpath(genpath('chronux'))
+% Add the path to where you unzipped the chronux toolbox below
+pathToChronux = '';
+addpath(genpath(pathToChronux), '-end')
 
 clear variables
 
