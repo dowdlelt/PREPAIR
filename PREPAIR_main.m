@@ -51,10 +51,10 @@ if prepair.savestats == 1
     % the user wants the stat files saved out, do it. 
     tempnii.img = t_c;
     tempnii.hdr = prepair.hdr;
+    tempnii.hdr.dime.dim(5) = 1; % update header, one timepoint
     save_nii(tempnii, fullfile(prepair.outdir,['tmap_cardiac_', prepair.outname]) )
 
-    tempnii.img = t_r;
-    tempnii.hdr = prepair.hdr;
+    tempnii.img = t_r; % no need to update hdr, using the one from just above
     save_nii(tempnii, fullfile(prepair.outdir,['tmap_respiration_', prepair.outname]) )
 end
 
