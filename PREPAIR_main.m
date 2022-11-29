@@ -1,10 +1,22 @@
 function prepair = PREPAIR_main(prepair)
+%% PREPAIR options
+% These are fields of the struct, for example - outdir refers to
+% prepair.outdir
+%
+% <outdir> A name for the folder that the output and intermediate files
+% will be saved to. 
+% <indir> The full path to the data files. 
+% <savestats> A boolean flag (1/0) for whether you would like to save out
+% the t statistic maps for the cardiac and respiratory regressor. 
+
 
 %% 1) Create outdir folder (indir/PREPAIR)
 
 % If the user has provided an out directory, use that. 
 if ~isfield(prepair, 'outdir')
     prepair.outdir = fullfile(prepair.indir, 'PREPAIR'); 
+else
+    prepair.outdir = fullfile(prepair.indir, prepair.outdir); 
 end
 
 if ~isfolder(prepair.outdir)
