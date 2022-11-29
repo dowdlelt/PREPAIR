@@ -2,7 +2,11 @@ function prepair = PREPAIR_main(prepair)
 
 %% 1) Create outdir folder (indir/PREPAIR)
 
-prepair.outdir = fullfile(prepair.indir, 'PREPAIR'); 
+% If the user has provided an out directory, use that. 
+if ~isfield(prepair, 'outdir')
+    prepair.outdir = fullfile(prepair.indir, 'PREPAIR'); 
+end
+
 if ~isfolder(prepair.outdir)
     command=['mkdir ' prepair.outdir];
     system(command);
